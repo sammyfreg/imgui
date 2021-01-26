@@ -3798,9 +3798,9 @@ void ImGui::NewFrame()
     
     // Remove pending delete hooks before frame start.
     // This deferred removal avoid issues of removal while iterating the hook vector
-    for (int n = g.Hooks.Size-1; n >= 0; --n)
+    for (int n = 0; n < g.Hooks.Size; ++n)
         if (g.Hooks[n].Type == ImGuiContextHookType_PendingRemoval)
-            g.Hooks.erase(&g.Hooks[n]);
+            g.Hooks.erase(&g.Hooks[n--]);
 
     CallContextHooks(&g, ImGuiContextHookType_NewFramePre);
 
